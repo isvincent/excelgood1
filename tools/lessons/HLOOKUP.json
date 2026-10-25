@@ -1,0 +1,163 @@
+{
+  "id": "HLOOKUP",
+  "cat": "lookup",
+  "emoji": "↔️",
+  "zh": "橫向表格查找",
+  "en": "Horizontal lookup across a row",
+  "desc": "在表格第一列找到查找值，再往下數到指定列號，傳回同一欄的資料，適合橫向排列的報表。",
+  "descEn": "Looks for a value in the top row of a table and returns a value from a given row in the same column.",
+  "syntax": "=HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])",
+  "keywords": ["查找", "橫向", "列號", "月報表", "級距"],
+  "level": 1,
+  "version": "所有版本",
+  "slides": [
+    {
+      "type": "title",
+      "say": [
+        "哈囉大家好，歡迎來到 Excel 函數教室！",
+        "今天要介紹的是 HLOOKUP 函數。",
+        "它是 VLOOKUP 的好兄弟，",
+        "專門處理橫著排的表格喔！"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "它能做什麼？",
+      "points": [
+        {"icon": "🎯", "text": "在第一列找查找值"},
+        {"icon": "👇", "text": "往下數到指定的列"},
+        {"icon": "🎁", "text": "傳回同一欄的資料"}
+      ],
+      "say": [
+        "HLOOKUP 的 H，代表水平方向。",
+        "它會在表格最上面那一列，由左往右找，",
+        "找到之後，往下數到你指定的第幾列，",
+        "把同一欄的資料拿回來。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "formula": "=HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])",
+      "args": [
+        {"name": "lookup_value", "zh": "要找的值", "req": true},
+        {"name": "table_array", "zh": "整個表格範圍", "req": true},
+        {"name": "row_index_num", "zh": "要傳回表格的第幾列", "req": true},
+        {"name": "range_lookup", "zh": "FALSE 完全，TRUE 近似", "req": false}
+      ],
+      "say": [
+        "我們來看看 HLOOKUP 的語法。",
+        "第一個引數是要找的值，",
+        "第二個是表格範圍，查找值要在最上面一列。",
+        "第三個是列號，從表格第一列開始往下數。",
+        "最後一個一樣是 FALSE 完全符合，TRUE 近似符合。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：查某月來客數",
+      "data": [
+        ["月份", "1月", "2月", "3月", "4月"],
+        ["銷售額", "120", "150", "98", "175"],
+        ["來客數", "300", "340", "260", "410"],
+        ["", "", "", "", ""],
+        ["查詢月份", "3月", "", "", ""],
+        ["來客數", "", "", "", ""]
+      ],
+      "cell": "B6",
+      "formula": "=HLOOKUP(B5,B1:E3,3,FALSE)",
+      "result": [["260"]],
+      "steps": [
+        {"at": 1, "range": "B5", "color": 0, "tag": "查找值"},
+        {"at": 2, "range": "B1:E1", "color": 1, "tag": "第一列"},
+        {"at": 3, "range": "B3:E3", "color": 2, "tag": "第3列"},
+        {"at": 4, "range": "D1:D3", "color": 3}
+      ],
+      "resultAt": 5,
+      "say": [
+        "來看第一個例子，這是一張橫向的月報表。",
+        "要找的值是 B5 的 3月，",
+        "HLOOKUP 會在表格第一列，B1 到 E1 裡找。",
+        "來客數在表格的第三列，所以列號填 3。",
+        "3月在 D 欄，往下數到第三列，",
+        "得到來客數 260！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：依重量查運費",
+      "data": [
+        ["重量kg", "0", "1", "3", "5", "10"],
+        ["運費", "60", "90", "130", "180", "250"],
+        ["", "", "", "", "", ""],
+        ["包裹重量", "4", "", "", "", ""],
+        ["運費", "", "", "", "", ""]
+      ],
+      "cell": "B5",
+      "formula": "=HLOOKUP(B4,B1:F2,2,TRUE)",
+      "result": [["130"]],
+      "steps": [
+        {"at": 1, "range": "B4", "color": 0, "tag": "查找值"},
+        {"at": 2, "range": "B1:F1", "color": 1, "tag": "由小到大"},
+        {"at": 3, "range": "D1:D2", "color": 3, "tag": "3 公斤級"}
+      ],
+      "resultAt": 4,
+      "note": "近似符合時，第一列要由小到大排序",
+      "say": [
+        "第二個例子，用重量查運費級距。",
+        "包裹重量是 B4 的 4 公斤。",
+        "重量列 B1 到 F1 由小到大排好，最後一個引數填 TRUE，",
+        "HLOOKUP 會找不超過 4 的最大值，也就是 3，",
+        "往下第二列，運費是 130 元！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "HLOOKUP vs VLOOKUP",
+      "head": ["比較項目", "VLOOKUP", "HLOOKUP"],
+      "rows": [
+        ["資料方向", "直向排列", "橫向排列"],
+        ["在哪裡找", "第一欄", "第一列"],
+        ["第三引數", "欄號", "列號"]
+      ],
+      "say": [
+        "我們把它跟 VLOOKUP 比一比。",
+        "VLOOKUP 處理直向資料，HLOOKUP 處理橫向資料。",
+        "一個在第一欄找，一個在第一列找，",
+        "第三個引數也從欄號變成列號。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "q": "月報表中 =HLOOKUP(\"2月\",B1:E3,2,FALSE) 會得到？",
+      "options": ["150", "340", "120", "#N/A"],
+      "answer": 0,
+      "explain": "2月在 C 欄，表格第 2 列是銷售額 150",
+      "say": [
+        "來個小測驗！",
+        "用剛剛的月報表查 2月，列號填 2，",
+        "會得到什麼呢？",
+        "給你三秒鐘想一想。",
+        "答案是 150！第二列是銷售額喔。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "在第一列由左往右找",
+        "列號從表格第一列數",
+        "FALSE 完全，TRUE 近似",
+        "新版可改用 XLOOKUP"
+      ],
+      "say": [
+        "最後來複習一下。",
+        "HLOOKUP 在表格第一列找值，",
+        "列號從表格第一列開始往下數。",
+        "新版 Excel 也可以改用更彈性的 XLOOKUP。",
+        "快打開 Excel 練習看看吧，我們下次見！"
+      ]
+    }
+  ]
+}

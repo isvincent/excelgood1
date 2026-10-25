@@ -1,0 +1,179 @@
+{
+  "id": "CONCATENATE",
+  "cat": "text",
+  "emoji": "🔗",
+  "zh": "把文字串接起來",
+  "en": "Join several text items into one",
+  "desc": "把多個儲存格或文字依序串接成一段文字，可加入符號、空格或說明文字，例如組合姓名與 Email。",
+  "descEn": "Joins two or more text items into a single text string.",
+  "syntax": "=CONCATENATE(text1, [text2], …)",
+  "keywords": ["合併文字", "串接", "組合", "姓名", "Email"],
+  "level": 1,
+  "version": "所有版本",
+  "slides": [
+    {
+      "type": "title",
+      "say": [
+        "哈囉大家好，歡迎來到 Excel 函數教室！",
+        "今天要介紹的是 CONCATENATE 函數。",
+        "它可以把好幾段文字，",
+        "像串珠子一樣接成一串。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "它能做什麼？",
+      "points": [
+        {"icon": "🧩", "text": "準備好幾段文字"},
+        {"icon": "🔗", "text": "依照順序串接"},
+        {"icon": "✨", "text": "變成一段新文字"}
+      ],
+      "say": [
+        "CONCATENATE 就像在串珠子。",
+        "你把要接的文字一顆一顆交給它，",
+        "它會照你給的順序把它們接起來，",
+        "最後變成一段完整的新文字。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "formula": "=CONCATENATE(text1, [text2], …)",
+      "args": [
+        {"name": "text1", "zh": "第一段文字或儲存格", "req": true},
+        {"name": "text2, …", "zh": "後面要接上的文字", "req": false}
+      ],
+      "say": [
+        "我們來看看 CONCATENATE 的語法。",
+        "text1 是第一段文字，一定要填。",
+        "後面可以一直接下去，最多 255 段。",
+        "直接打的文字要用雙引號包起來喔。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：姓＋名",
+      "data": [
+        ["姓", "名", "全名"],
+        ["王", "小明", ""],
+        ["李", "美華", ""],
+        ["陳", "志強", ""]
+      ],
+      "cell": "C2",
+      "formula": "=CONCATENATE(A2,B2)",
+      "result": [["王小明"]],
+      "steps": [
+        {"at": 1, "range": "A2", "color": 0, "tag": "姓"},
+        {"at": 2, "range": "B2", "color": 1, "tag": "名"}
+      ],
+      "resultAt": 3,
+      "note": "往下填滿就能完成其他列",
+      "say": [
+        "第一個例子，把姓和名合起來。",
+        "第一段文字是 A2 的王，",
+        "第二段文字是 B2 的小明，",
+        "接起來就變成全名，王小明！",
+        "再把公式往下填滿，其他人也完成了。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：組合 Email",
+      "data": [
+        ["帳號", "網域", "Email"],
+        ["amy", "ymhs.tw", ""],
+        ["tom", "gmail.com", ""],
+        ["s1120301", "ymhs.tw", ""]
+      ],
+      "cell": "C2",
+      "formula": "=CONCATENATE(A2,\"@\",B2)",
+      "result": [["amy@ymhs.tw"]],
+      "steps": [
+        {"at": 1, "range": "A2", "color": 0, "tag": "帳號"},
+        {"at": 2, "range": "B2", "color": 2, "tag": "網域"}
+      ],
+      "resultAt": 3,
+      "say": [
+        "第二個例子，把帳號和網域組成 Email。",
+        "先放 A2 的帳號 amy，",
+        "中間加上小老鼠符號，再接 B2 的網域。",
+        "完成！amy@ymhs.tw。",
+        "符號要記得用雙引號包起來。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：加上說明文字",
+      "data": [
+        ["姓名", "分數", "評語"],
+        ["王小明", "95", ""],
+        ["李美華", "88", ""],
+        ["陳志強", "72", ""]
+      ],
+      "cell": "C2",
+      "formula": "=CONCATENATE(A2,\"考了\",B2,\"分\")",
+      "result": [["王小明考了95分"]],
+      "steps": [
+        {"at": 1, "range": "A2", "color": 0, "tag": "姓名"},
+        {"at": 2, "range": "B2", "color": 1, "tag": "分數"}
+      ],
+      "resultAt": 3,
+      "say": [
+        "第三個例子，讓表格自動寫評語。",
+        "先放 A2 的姓名，接上考了兩個字，",
+        "再接 B2 的分數，最後加上分。",
+        "結果就是，王小明考了95分！"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "串接的其他方法",
+      "head": ["方法", "寫法", "特色"],
+      "rows": [
+        ["CONCATENATE", "逐一列出", "所有版本可用"],
+        ["& 符號", "A2&B2", "最簡短"],
+        ["CONCAT", "可選整個範圍", "2019 以後"],
+        ["TEXTJOIN", "可設分隔符號", "2019 以後"]
+      ],
+      "say": [
+        "串接文字其實還有其他方法。",
+        "CONCATENATE 所有版本都能用。",
+        "& 符號寫起來最短，例如 A2&B2。",
+        "CONCAT 可以直接選整個範圍，",
+        "TEXTJOIN 還能自動加上分隔符號。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "q": "=CONCATENATE(\"A\",\"-\",\"01\") 會得到？",
+      "options": ["A-01", "A01", "A,-,01", "#VALUE!"],
+      "answer": 0,
+      "explain": "三段文字依序接起來，得到 A-01",
+      "say": [
+        "來個小測驗！",
+        "用 CONCATENATE 串接 A、橫線和 01，",
+        "會得到什麼呢？",
+        "給你三秒鐘想一想。",
+        "答案是 A-01！三段文字照順序接在一起。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "依序串接多段文字",
+        "文字與符號要加雙引號",
+        "空格也要自己加",
+        "也可以用 & 符號"
+      ],
+      "say": [
+        "最後來複習一下。",
+        "CONCATENATE 會依照順序把文字串接起來。",
+        "直接輸入的文字和符號要加雙引號，",
+        "需要空格也要自己加，也可以改用 & 符號。",
+        "快打開 Excel 練習看看吧，我們下次見！"
+      ]
+    }
+  ]
+}

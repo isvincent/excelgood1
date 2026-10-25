@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RIGHT 函數教學影片｜Excel 函數教室</title>
+<meta name="description" content="RIGHT 函數：從右邊取出文字 — 自動播放的 9:16 教學影片（語音旁白、字幕、動畫講者）">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="icon" href="../icons/icon.svg" type="image/svg+xml">
+<style>
+:root{--c1:#2563eb;--c2:#06b6d4;--ink:#0f172a;--paper:#ffffff;--soft:#f1f5f9;
+  --k0:#2563eb;--k1:#f97316;--k2:#16a34a;--k3:#db2777;--k4:#7c3aed;--k5:#0891b2;
+  --font:"Microsoft JhengHei","PingFang TC","Noto Sans TC","Heiti TC",system-ui,sans-serif;
+  --mono:"Cascadia Code",Consolas,"SFMono-Regular",Menlo,monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#0b1020;overflow:hidden;font-family:var(--font);color:var(--ink)}
+#wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{position:absolute;left:50%;top:50%;width:1080px;height:1920px;transform-origin:50% 50%;overflow:hidden;
+  background:linear-gradient(160deg,var(--c1) 0%,var(--c2) 100%);border-radius:28px;box-shadow:0 30px 80px rgba(0,0,0,.5);user-select:none}
+/* animated background */
+#bg{position:absolute;inset:0;opacity:.18}
+#bg .f{position:absolute;color:#fff;font:900 70px var(--mono);animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(2000px) rotate(0)}to{transform:translateY(-200px) rotate(360deg)}}
+/* top bar */
+#top{position:absolute;left:40px;right:40px;top:40px;height:120px;display:flex;align-items:center;gap:22px;z-index:5}
+#brand{background:#fff;border-radius:999px;padding:14px 30px;font-weight:900;font-size:36px;display:flex;gap:12px;align-items:center;box-shadow:0 8px 20px rgba(0,0,0,.15)}
+#brand b{color:var(--c1)}
+#fname{color:#fff;font:900 54px var(--mono);text-shadow:0 4px 12px rgba(0,0,0,.25);flex:1;text-align:right;letter-spacing:1px}
+#dots{position:absolute;left:40px;right:40px;top:176px;display:flex;gap:10px;z-index:5}
+#dots i{flex:1;height:12px;border-radius:9px;background:rgba(255,255,255,.3);cursor:pointer;transition:.3s}
+#dots i.on{background:#fff}#dots i.cur{background:#fde047;box-shadow:0 0 14px #fde047}
+/* slides */
+#slides{position:absolute;left:30px;right:30px;top:220px;height:1250px;perspective:2400px;z-index:3}
+.slide{position:absolute;inset:0;background:var(--paper);border-radius:40px;box-shadow:0 24px 60px rgba(0,0,0,.25);padding:56px 50px;display:flex;flex-direction:column;gap:30px;overflow:hidden;backface-visibility:hidden}
+.slide h2{font-size:64px;font-weight:900;line-height:1.2;display:flex;align-items:center;gap:20px}
+.slide h2 .n{flex:none;width:84px;height:84px;border-radius:24px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;display:grid;place-items:center;font-size:44px}
+.r{opacity:0;transform:translateY(40px) scale(.96);transition:opacity .55s,transform .55s cubic-bezier(.2,1.4,.4,1)}
+.r.on{opacity:1;transform:none}
+/* transitions */
+.in-fade{animation:inFade .8s both}.out-fade{animation:outFade .8s both}
+@keyframes inFade{from{opacity:0;transform:scale(1.06)}}@keyframes outFade{to{opacity:0;transform:scale(.94)}}
+.in-slide{animation:inSlide .8s cubic-bezier(.6,0,.2,1) both}.out-slide{animation:outSlide .8s cubic-bezier(.6,0,.2,1) both}
+@keyframes inSlide{from{transform:translateX(110%) rotate(6deg)}}@keyframes outSlide{to{transform:translateX(-110%) rotate(-6deg)}}
+.in-flip{animation:inFlip .9s ease both}.out-flip{animation:outFlip .9s ease both}
+@keyframes inFlip{from{transform:rotateY(-95deg);opacity:0}}@keyframes outFlip{to{transform:rotateY(95deg);opacity:0}}
+.in-circle{animation:inCircle .9s ease-in-out both;z-index:2}.out-circle{animation:outFade .9s both}
+@keyframes inCircle{from{clip-path:circle(0% at 85% 95%)}to{clip-path:circle(150% at 85% 95%)}}
+.in-up{animation:inUp .8s cubic-bezier(.2,1.2,.4,1) both}.out-up{animation:outUp .8s both}
+@keyframes inUp{from{transform:translateY(105%)}}@keyframes outUp{to{transform:translateY(-30%) scale(.8);opacity:0}}
+/* caption + speaker */
+#cap{position:absolute;left:40px;top:1500px;width:700px;height:300px;z-index:6;display:flex;align-items:center}
+#capbox{width:100%;min-height:150px;background:rgba(15,23,42,.88);color:#fff;border-radius:34px;padding:30px 36px;font-size:50px;line-height:1.42;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.3);position:relative;transition:opacity .3s}
+#capbox:after{content:"";position:absolute;right:-26px;bottom:50px;border:18px solid transparent;border-left:26px solid rgba(15,23,42,.88)}
+#capbox.pop{animation:capPop .35s ease}
+@keyframes capPop{from{transform:translateY(20px);opacity:.2}}
+#capbox.off{opacity:0}
+#spk{position:absolute;right:30px;top:1440px;width:300px;height:380px;z-index:7}
+#spk .card{position:absolute;inset:0;border-radius:40px;background:radial-gradient(circle at 50% 35%,#fff7ed,#fde68a 70%,#fbbf24);box-shadow:0 14px 34px rgba(0,0,0,.3);overflow:hidden;border:6px solid #fff}
+#spk svg{position:absolute;left:0;top:0;width:100%;height:100%}
+#spk .tag{position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);background:#fff;border-radius:999px;padding:6px 22px;font-weight:900;font-size:26px;white-space:nowrap;box-shadow:0 6px 14px rgba(0,0,0,.2);color:var(--c1)}
+#spk .wave{position:absolute;left:-14px;top:150px;width:40px;height:90px;display:flex;gap:6px;align-items:center;opacity:0;transition:.3s}
+#spk.talk .wave{opacity:1}
+#spk .wave i{width:8px;border-radius:5px;background:#fff;animation:wv .5s ease-in-out infinite alternate}
+#spk .wave i:nth-child(2){animation-delay:.15s}#spk .wave i:nth-child(3){animation-delay:.3s}
+@keyframes wv{from{height:16px}to{height:70px}}
+#body{animation:sway 4s ease-in-out infinite;transform-origin:150px 380px}
+@keyframes sway{50%{transform:rotate(1.5deg)}}
+#eyes{animation:blink 4.2s infinite;transform-origin:150px 170px}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+#arm{transform-origin:250px 330px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+#spk.point #arm{transform:rotate(-38deg)}
+/* controls */
+#ctl{position:absolute;left:30px;right:30px;top:1822px;height:72px;z-index:8;display:flex;align-items:center;gap:14px}
+#ctl button{height:72px;min-width:72px;padding:0 18px;border:0;border-radius:22px;background:rgba(255,255,255,.92);font:900 34px var(--font);cursor:pointer;color:var(--ink);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+#ctl button:active{transform:scale(.93)}
+#ctl button.offb{opacity:.45}
+#bar{flex:1;height:18px;border-radius:12px;background:rgba(255,255,255,.35);overflow:hidden;cursor:pointer}
+#bar i{display:block;height:100%;width:0;background:#fde047;transition:width .4s}
+/* start + end overlays */
+.ov{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px;background:rgba(10,15,35,.55);backdrop-filter:blur(6px);color:#fff;text-align:center;padding:60px}
+.ov[hidden]{display:none}
+.big{width:300px;height:300px;border-radius:50%;border:0;background:#fff;color:var(--c1);font-size:140px;cursor:pointer;box-shadow:0 0 0 24px rgba(255,255,255,.25),0 30px 60px rgba(0,0,0,.4);animation:pulse 1.6s infinite;padding-left:24px}
+@keyframes pulse{50%{box-shadow:0 0 0 48px rgba(255,255,255,.08),0 30px 60px rgba(0,0,0,.4)}}
+.ov h1{font:900 110px var(--mono)}.ov p{font-size:46px;font-weight:700;line-height:1.5}
+.ov .btns{display:flex;flex-wrap:wrap;gap:24px;justify-content:center}
+.ov .btns a,.ov .btns button{font:900 44px var(--font);padding:26px 44px;border-radius:30px;border:0;background:#fff;color:var(--ink);text-decoration:none;cursor:pointer}
+.ov .btns .pri{background:#fde047}
+/* ---- slide types ---- */
+.title{background:linear-gradient(180deg,#fff,#f8fafc);align-items:center;justify-content:center;text-align:center}
+.title .fx{font:900 150px var(--mono);background:linear-gradient(90deg,var(--c1),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:2px;line-height:1.1;word-break:break-all}
+.title .sub{font-size:68px;font-weight:900}
+.title .chips{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:12px 28px;font-size:36px;font-weight:800;background:var(--soft)}
+.title .syn{font:700 36px var(--mono);background:#0f172a;color:#e2e8f0;padding:24px 30px;border-radius:24px;max-width:100%;word-break:break-all;line-height:1.45;text-align:left}
+.hero{width:560px;height:400px}
+.hero .float{animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-16px)}}
+.pts{display:flex;flex-direction:column;gap:30px;flex:1;justify-content:center}
+.pt{display:flex;align-items:center;gap:30px;background:var(--soft);border-radius:34px;padding:34px 36px;font-size:54px;font-weight:800;border-left:16px solid var(--c1)}
+.pt:nth-child(2){border-color:var(--k1)}.pt:nth-child(3){border-color:var(--k2)}.pt:nth-child(4){border-color:var(--k3)}
+.pt .ic{font-size:90px;flex:none;width:120px;text-align:center}
+.pt.on .ic{animation:bounce .8s}
+@keyframes bounce{40%{transform:scale(1.35) rotate(-10deg)}}
+.formula{font:800 46px var(--mono);line-height:1.7;background:#0f172a;color:#e2e8f0;border-radius:30px;padding:30px 34px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px}
+.formula .fn{color:#fde047}
+.argc{display:inline-block;border-radius:14px;padding:0 12px;color:#fff;font-size:38px}
+.args{display:flex;flex-direction:column;gap:20px;flex:1;justify-content:center}
+.arg{display:flex;align-items:center;gap:22px;background:var(--soft);border-radius:26px;padding:22px 28px}
+.arg .nm{font:800 36px var(--mono);color:#fff;border-radius:14px;padding:8px 16px;flex:none;max-width:52%;word-break:break-all}
+.arg .zh{font-size:42px;font-weight:800;flex:1}
+.arg .bd{font-size:30px;font-weight:900;border-radius:999px;padding:6px 18px;flex:none}
+.many .formula{font-size:38px;padding:22px 26px;line-height:1.55}.many .argc{font-size:32px}.many .args{gap:14px}.many .arg{padding:14px 24px}.many .arg .zh{font-size:38px}
+.bd.req{background:#fee2e2;color:#b91c1c}.bd.opt{background:#e0e7ff;color:#4338ca}
+.fbar{display:flex;align-items:stretch;border:4px solid #cbd5e1;border-radius:20px;overflow:hidden;background:#fff;min-height:96px}
+.fbar .nb{background:#e2e8f0;font:900 38px var(--mono);padding:0 20px;display:flex;align-items:center;flex:none}
+.fbar .fxi{font:italic 900 40px Georgia,serif;color:#16a34a;padding:0 18px;display:flex;align-items:center;border-right:3px solid #e2e8f0;flex:none}
+.fbar .ft{font:800 40px var(--mono);padding:14px 20px;display:flex;align-items:center;word-break:break-all;line-height:1.35}
+.fbar .ft .cur{display:inline-block;width:4px;height:44px;background:#0f172a;margin-left:4px;animation:cb .8s steps(1) infinite;vertical-align:middle}
+@keyframes cb{50%{opacity:0}}
+.sheetwrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;min-height:0}
+.sheet{width:100%}
+.sheet .hl{transition:opacity .4s}
+.sheet .ants{animation:ants .8s linear infinite}
+@keyframes ants{to{stroke-dashoffset:-28}}
+.sheet .res{opacity:0;transform-box:fill-box;transform-origin:center;transition:opacity .4s}
+.sheet .res.on{opacity:1;animation:popc .6s cubic-bezier(.2,1.8,.4,1)}
+@keyframes popc{from{transform:scale(.2)}}
+.legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;min-height:10px}
+.lg{display:inline-flex;align-items:center;gap:12px;font-size:38px;font-weight:900;color:var(--k);background:color-mix(in srgb,var(--k) 12%,#fff);border:4px dashed var(--k);border-radius:999px;padding:6px 24px}
+.lg i{width:30px;height:30px;border-radius:8px;background:var(--k)}
+.note{font-size:40px;font-weight:800;background:#fef9c3;border-radius:22px;padding:18px 28px;color:#854d0e}
+.flow{display:flex;flex-direction:column;align-items:center;gap:0;flex:1;justify-content:center}
+.fl{width:92%;display:flex;align-items:center;gap:28px;background:var(--soft);border-radius:32px;padding:30px 34px;font-size:50px;font-weight:800;box-shadow:0 8px 0 rgba(0,0,0,.06)}
+.fl .ic{font-size:76px;flex:none}
+.arrow{font-size:64px;color:var(--c1);line-height:1;padding:8px 0}
+table.cmp{width:100%;border-collapse:separate;border-spacing:0 16px;font-size:44px;font-weight:800}
+table.cmp th{background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;padding:24px 16px;font-size:44px}
+table.cmp th:first-child{border-radius:24px 0 0 24px}table.cmp th:last-child{border-radius:0 24px 24px 0}
+table.cmp td{background:var(--soft);padding:26px 18px;text-align:center}
+table.cmp td:first-child{border-radius:24px 0 0 24px;background:#e2e8f0}table.cmp td:last-child{border-radius:0 24px 24px 0;background:#dcfce7}
+.tips{display:flex;flex-direction:column;gap:28px;flex:1;justify-content:center}
+.tip{display:flex;gap:28px;align-items:flex-start;background:#fff7ed;border:5px solid #fed7aa;border-radius:32px;padding:30px 32px}
+.tip:nth-child(2){background:#eff6ff;border-color:#bfdbfe}.tip:nth-child(3){background:#f0fdf4;border-color:#bbf7d0}.tip:nth-child(4){background:#fdf2f8;border-color:#fbcfe8}
+.tip .ic{font-size:80px;flex:none}.tip b{display:block;font-size:50px;margin-bottom:8px}.tip span{font-size:42px;font-weight:700;line-height:1.4}
+.q{font:800 50px var(--font);line-height:1.45;background:#0f172a;color:#fff;border-radius:30px;padding:34px 36px;word-break:break-word}
+.q code{font-family:var(--mono);color:#fde047}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.opt{border:5px solid #cbd5e1;background:#fff;border-radius:30px;padding:30px 24px;font:800 46px var(--font);display:flex;align-items:center;gap:18px;cursor:pointer;text-align:left;color:var(--ink);word-break:break-all}
+.opt .l{flex:none;width:72px;height:72px;border-radius:50%;background:var(--c1);color:#fff;display:grid;place-items:center;font-size:40px}
+.opt.right{border-color:#16a34a;background:#dcfce7;animation:bounce .7s}.opt.wrong{border-color:#ef4444;background:#fee2e2;opacity:.75}
+.timer{align-self:center;width:170px;height:170px}
+.timer circle.p{transition:stroke-dashoffset 1s linear}
+.exp{font-size:44px;font-weight:800;background:#dcfce7;color:#166534;border-radius:26px;padding:24px 30px}
+.recap{display:flex;flex-direction:column;gap:26px;flex:1;justify-content:center}
+.rc{display:flex;align-items:center;gap:26px;font-size:52px;font-weight:800;background:var(--soft);border-radius:30px;padding:30px 32px}
+.rc .ck{flex:none;width:86px;height:86px;border-radius:50%;background:#e2e8f0;display:grid;place-items:center;font-size:52px;color:#fff;transition:.4s}
+.rc.on .ck{background:#16a34a;animation:bounce .7s}
+.stars{font-size:90px;text-align:center;letter-spacing:20px}
+.stars span{display:inline-block;animation:float 2s ease-in-out infinite}
+.stars span:nth-child(2){animation-delay:.3s}.stars span:nth-child(3){animation-delay:.6s}
+#confetti{position:absolute;inset:0;pointer-events:none;z-index:30}
+@media (prefers-reduced-motion:reduce){#bg .f{animation:none}}
+</style>
+</head>
+<body>
+<div id="wrap"><div id="stage">
+  <div id="bg"></div>
+  <div id="top"><div id="brand">📗 <span>Excel <b>函數教室</b></span></div><div id="fname"></div></div>
+  <div id="dots"></div>
+  <div id="slides"></div>
+  <div id="cap"><div id="capbox" class="off"></div></div>
+  <div id="spk">
+    <div class="card"><svg viewBox="0 0 300 380" aria-label="動畫講者">
+      <g id="body">
+        <path d="M95 150 Q60 250 70 330 L230 330 Q240 250 205 150Z" fill="#3b2422"/>
+        <path d="M30 390 Q34 292 150 280 Q266 292 270 390Z" fill="#0d9488"/>
+        <path d="M118 284 L150 330 L182 284Z" fill="#fff"/>
+        <rect x="132" y="232" width="36" height="58" rx="14" fill="#f2bf9e"/>
+        <rect x="186" y="318" width="64" height="30" rx="8" fill="#fff"/><text x="218" y="339" font-size="16" font-weight="900" text-anchor="middle" fill="#0d9488">Excel</text>
+        <ellipse cx="82" cy="172" rx="12" ry="16" fill="#f7cbb0"/><ellipse cx="218" cy="172" rx="12" ry="16" fill="#f7cbb0"/>
+        <circle cx="82" cy="190" r="5" fill="#fde047"/><circle cx="218" cy="190" r="5" fill="#fde047"/>
+        <ellipse cx="150" cy="165" rx="70" ry="80" fill="#ffdcc5"/>
+        <path d="M76 160 Q80 80 150 76 Q222 80 224 160 Q212 112 168 108 Q150 128 104 122 Q86 136 76 160Z" fill="#3b2422"/>
+        <path d="M200 92 Q236 70 246 108 Q232 98 214 112Z" fill="#3b2422"/><circle cx="232" cy="96" r="9" fill="#f43f5e"/>
+        <path d="M106 146 Q122 138 138 146" stroke="#3b2422" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M162 146 Q178 138 194 146" stroke="#3b2422" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <g id="eyes"><ellipse cx="122" cy="172" rx="9" ry="12" fill="#2b1d1d"/><ellipse cx="178" cy="172" rx="9" ry="12" fill="#2b1d1d"/>
+          <circle cx="125" cy="167" r="3.5" fill="#fff"/><circle cx="181" cy="167" r="3.5" fill="#fff"/></g>
+        <g fill="none" stroke="#7c3aed" stroke-width="4"><circle cx="122" cy="172" r="21"/><circle cx="178" cy="172" r="21"/><path d="M143 170 Q150 164 157 170"/></g>
+        <circle cx="106" cy="204" r="12" fill="#ff8fab" opacity=".45"/><circle cx="194" cy="204" r="12" fill="#ff8fab" opacity=".45"/>
+        <path d="M150 182 Q145 197 153 199" stroke="#d99a7a" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <g transform="translate(150 222)"><path id="mouth" fill="#b91c3c"/><path id="teeth" fill="#fff"/><ellipse id="tongue" cx="0" rx="11" fill="#fb7185"/></g>
+        <g id="arm"><path d="M236 330 L262 262" stroke="#f2bf9e" stroke-width="16" stroke-linecap="round"/><path d="M262 262 L286 168" stroke="#78350f" stroke-width="6" stroke-linecap="round"/><circle cx="286" cy="168" r="7" fill="#ef4444"/></g>
+      </g>
+    </svg></div>
+    <div class="wave"><i></i><i></i><i></i></div>
+    <div class="tag">🎙️ 小薇老師</div>
+  </div>
+  <div id="ctl">
+    <button id="bHome" title="回首頁">🏠</button>
+    <button id="bPrev" title="上一張">⏮</button>
+    <button id="bPlay" title="播放／暫停">⏸</button>
+    <button id="bNext" title="下一張">⏭</button>
+    <div id="bar"><i></i></div>
+    <button id="bCC" title="字幕">CC</button>
+    <button id="bVoice" title="語音">🗣️</button>
+    <button id="bRate" title="語速">1.15×</button>
+  </div>
+  <div class="ov" id="start">
+    <div style="font-size:150px" id="sEmoji"></div>
+    <h1 id="sName"></h1>
+    <p id="sZh"></p>
+    <button class="big" id="bStart" aria-label="開始播放">▶</button>
+    <p style="font-size:38px;opacity:.9">點一下開始播放（含語音旁白與字幕）<br>空白鍵 暫停／繼續　← → 換頁</p>
+  </div>
+  <div class="ov" id="end" hidden>
+    <div style="font-size:160px">🎉</div><h1 style="font-size:90px;font-family:var(--font)">學完了，太棒了！</h1>
+    <p id="eTxt"></p>
+    <div class="btns"><button id="bAgain">🔁 再看一次</button><a id="aNext" class="pri" href="#">下一個函數 ➜</a><a id="aHome" href="../index.html" target="_top">🏠 回首頁</a></div>
+  </div>
+  <canvas id="confetti" width="1080" height="1920"></canvas>
+</div></div>
+<script>
+const L = {"id":"RIGHT","cat":"text","emoji":"➡️","zh":"從右邊取出文字","en":"Take characters from the right","desc":"從文字的最右邊開始，取出指定個數的字元，常用來擷取電話末碼、副檔名或名字。","descEn":"Returns the specified number of characters from the end of a text string.","syntax":"=RIGHT(text, [num_chars])","keywords":["擷取文字","後幾個字","右邊","末碼","副檔名"],"level":1,"version":"所有版本","slides":[{"type":"title","say":["哈囉大家好，歡迎來到 Excel 函數教室！","今天要介紹的是 RIGHT 函數。","它和 LEFT 是好兄弟，","專門從文字的最右邊取出字元。"]},{"type":"concept","title":"它能做什麼？","points":[{"icon":"📄","text":"給它一段文字"},{"icon":"✂️","text":"從最右邊開始剪"},{"icon":"🎁","text":"傳回最後幾個字元"}],"say":["RIGHT 就像從尾巴下刀的剪刀。","你先給它一段文字，","再告訴它要從右邊剪幾個字，","它就把最後面的那幾個字元交給你。"]},{"type":"syntax","title":"語法結構","formula":"=RIGHT(text, [num_chars])","args":[{"name":"text","zh":"原本的文字","req":true},{"name":"num_chars","zh":"要取幾個字，省略時取 1 個","req":false}],"say":["RIGHT 的語法和 LEFT 一模一樣。","第一個引數 text 是原本的文字。","第二個引數是要從右邊取幾個字元，","省略的話，就只取最後 1 個字。"]},{"type":"sheet","title":"範例一：手機末三碼","data":[["姓名","手機","末三碼"],["王小明","0912345678",""],["李美華","0922333444",""],["陳志強","0933765021",""],["林雅婷","0955667788",""]],"cell":"C2","formula":"=RIGHT(B2:B5,3)","result":[["678"],["444"],["021"],["788"]],"steps":[{"at":1,"range":"B2:B5","color":0,"tag":"手機"},{"at":2,"range":"B4","color":3,"tag":"末三碼"}],"resultAt":3,"note":"結果是文字，所以 021 的 0 不會消失","say":["第一個例子，取出手機號碼的末三碼。","文字選取手機欄，B2 到 B5，","第二個引數填 3。","結果是 678、444、021 和 788。","因為取出的是文字，021 前面的 0 也會保留喔。"]},{"type":"sheet","title":"範例二：取副檔名","data":[["檔名","副檔名"],["報告.docx",""],["成績.xlsx",""],["簡報.pptx",""],["照片.jpg",""]],"cell":"B2","formula":"=RIGHT(A2:A5,4)","result":[["docx"],["xlsx"],["pptx"],[".jpg"]],"steps":[{"at":1,"range":"A2:A5","color":0,"tag":"檔名"},{"at":4,"range":"A5","color":3,"tag":"只有 3 碼"}],"resultAt":2,"say":["第二個例子，想從檔名取出副檔名。","對 A2 到 A5 從右邊取 4 個字，","docx、xlsx、pptx 都很順利。","可是最後一筆卻多了一個點，","因為 jpg 只有三碼，長度不一樣就會出錯。"]},{"type":"sheet","title":"範例三：搭配 LEN 去掉姓","data":[["姓名","名字"],["王小明",""],["李美華",""],["張三",""]],"cell":"B2","formula":"=RIGHT(A2:A4,LEN(A2:A4)-1)","result":[["小明"],["美華"],["三"]],"steps":[{"at":1,"range":"A2:A4","color":0,"tag":"姓名"},{"at":2,"range":"A4","color":2,"tag":"兩個字"}],"resultAt":4,"say":["名字長短不同時，可以請 LEN 來幫忙。","先用 LEN 算出 A2 到 A4 的總字數，","王小明是 3 個字，張三只有 2 個字，","總字數減 1，就是去掉姓之後的字數。","結果小明、美華和三，都正確取出來了！"]},{"type":"compare","title":"LEFT vs RIGHT","head":["比較項目","LEFT","RIGHT"],"rows":[["從哪邊取","最左邊","最右邊"],["常見用途","縣市、前綴","末碼、副檔名"],["省略字數","取 1 個","取 1 個"]],"say":["我們把 RIGHT 和 LEFT 比一比。","LEFT 從左邊取，RIGHT 從右邊取。","LEFT 常用來取縣市或代碼前綴，RIGHT 常取末碼。","省略第二個引數時，兩個都只取 1 個字。"]},{"type":"quiz","title":"隨堂小測驗","q":"=RIGHT(\"A123456789\") 會得到？","options":["9","89","A","789"],"answer":0,"explain":"省略第 2 個引數時，只取最右邊 1 個字","say":["來個小測驗！","對 A123456789 使用 RIGHT，","而且省略第二個引數，會得到什麼呢？","給你三秒鐘想一想。","答案是 9！省略時只取最右邊的 1 個字。"]},{"type":"recap","title":"重點回顧","items":["從最右邊取出字元","省略字數時取 1 個","長度不一可搭配 LEN","取出的結果是文字"],"say":["最後來複習一下。","RIGHT 會從文字的最右邊取出指定個數的字元，","省略第二個引數時只取 1 個。","長度不一樣時，可以搭配 LEN 來計算字數。","快打開 Excel 練習看看吧，我們下次見！"]}]};
+const NAV = {"prev":"LEFT","next":{"id":"MID"}};
+const CATS = {lookup:["#2563eb","#06b6d4","查找與參照"],dynamic:["#7c3aed","#ec4899","動態陣列"],shape:["#ea580c","#f59e0b","陣列重組"],
+  text:["#059669","#84cc16","文字處理"],math:["#dc2626","#f97316","數學統計"],logic:["#0284c7","#8b5cf6","邏輯與名稱"],date:["#db2777","#f43f5e","日期與時間"]};
+const KC = ["#2563eb","#f97316","#16a34a","#db2777","#7c3aed","#0891b2"];
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const cat = CATS[L.cat] || CATS.lookup;
+document.documentElement.style.setProperty("--c1", cat[0]);
+document.documentElement.style.setProperty("--c2", cat[1]);
+$("#fname").textContent = L.id;
+$("#sEmoji").textContent = L.emoji; $("#sName").textContent = L.id; $("#sZh").textContent = L.zh;
+const inFrame = window.self !== window.top;
+
+/* ---------- layout scaling ---------- */
+function fit(){const s=Math.min(innerWidth/1080,innerHeight/1920);const st=$("#stage");st.style.transformOrigin="50% 50%";st.style.transform=`translate(-50%,-50%) scale(${s})`}
+addEventListener("resize",fit);fit();
+
+/* ---------- background ---------- */
+(()=>{const g=["fx","=","Σ","A1","#","{ }","%","+",L.id.slice(0,3)];let h="";for(let i=0;i<16;i++){h+=`<span class="f" style="left:${(i*67)%1040}px;animation-duration:${18+(i*7)%17}s;animation-delay:-${(i*5)%20}s;font-size:${50+(i*13)%60}px">${esc(g[i%g.length])}</span>`}$("#bg").innerHTML=h})();
+
+/* ---------- prefs ---------- */
+const P = (()=>{try{return JSON.parse(localStorage.getItem("xlfx-player")||"{}")}catch(e){return{}}})();
+let voiceOn = P.voice!==false, ccOn = P.cc!==false, rate = P.rate||1.15, sfxOn = (()=>{try{return localStorage.getItem("xlfx-sound")!=="off"}catch(e){return true}})();
+function saveP(){try{localStorage.setItem("xlfx-player",JSON.stringify({voice:voiceOn,cc:ccOn,rate}))}catch(e){}}
+
+/* ---------- sfx ---------- */
+let AC=null;
+function tone(f,d=.12,type="sine",v=.06,f2){if(!sfxOn)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+const sfx={whoosh:()=>tone(300,.35,"triangle",.05,1200),pop:()=>tone(660,.09,"sine",.05,990),ok:()=>{tone(523,.12);setTimeout(()=>tone(784,.2),110)},no:()=>tone(220,.25,"sawtooth",.04,140),tick:()=>tone(1200,.04,"square",.02)};
+
+/* ---------- speaker mouth ---------- */
+const mouth=$("#mouth"),teeth=$("#teeth"),tongue=$("#tongue");
+function setMouth(o){const w=20+o*5,up=-2-o*3,lo=4+o*22;mouth.setAttribute("d",`M${-w},0 Q0,${up*2} ${w},0 Q0,${lo*2} ${-w},0Z`);
+  teeth.setAttribute("d",o>.15?`M${-w*.62},${up+.5} L${w*.62},${up+.5} L${w*.5},${up+5} L${-w*.5},${up+5}Z`:"");
+  tongue.setAttribute("cy",lo*.8);tongue.setAttribute("ry",o>.35?lo*.25:0)}
+setMouth(0);
+let mouthT=null,talking=false,boost=0;
+function talk(on){talking=on;$("#spk").classList.toggle("talk",on);clearInterval(mouthT);
+  if(on){let ph=0;mouthT=setInterval(()=>{ph++;const o=boost>0?(boost--,.85+Math.random()*.15):(ph%5===4?.08:.25+Math.random()*.7);setMouth(o)},85)}else setMouth(0)}
+
+/* ---------- voice ---------- */
+const synth=window.speechSynthesis;let voice=null;
+function pickVoice(){if(!synth)return;const vs=synth.getVoices();if(!vs.length)return;
+  const male=/YunJhe|Zhiwei|Yunxi|Yunyang|Kangkang|Male|男/i;
+  const prefer=[/HsiaoChen/i,/HsiaoYu/i,/Google 國語/i,/Hanhan/i,/Yating/i,/Mei-?Jia/i,/female|女/i];
+  const tw=vs.filter(v=>/zh[-_]TW/i.test(v.lang)&&!male.test(v.name));
+  const zh=vs.filter(v=>/^zh/i.test(v.lang)&&!male.test(v.name));
+  for(const re of prefer){const v=tw.find(v=>re.test(v.name));if(v){voice=v;return}}
+  voice=tw[0]||zh.find(v=>/HK|CN/i.test(v.lang))||zh[0]||null}
+if(synth){pickVoice();synth.onvoiceschanged=pickVoice}
+function ttsText(t){return t.replace(/#N\/A/g,"N A").replace(/#VALUE!/g,"VALUE").replace(/#REF!/g,"REF").replace(/#NUM!/g,"NUM").replace(/#SPILL!/g,"SPILL").replace(/#CALC!/g,"CALC").replace(/#DIV\/0!/g,"除以零錯誤").replace(/#/g,"").replace(/=/g,"等於 ")}
+let token=0;
+function speak(text,tk){return new Promise(res=>{
+  const est=Math.max(1.4,[...text].reduce((a,c)=>a+(c.charCodeAt(0)<128?.11:.24),0)/rate)*1000;
+  let done=false;const fin=()=>{if(done)return;done=true;talk(false);res()};
+  talk(true);
+  if(voiceOn&&synth){
+    const u=new SpeechSynthesisUtterance(ttsText(text));u.lang=voice?voice.lang:"zh-TW";if(voice)u.voice=voice;u.rate=rate;u.pitch=1.08;
+    u.onboundary=()=>{boost=2};u.onend=fin;u.onerror=fin;
+    try{synth.cancel();synth.speak(u)}catch(e){setTimeout(fin,est)}
+    setTimeout(()=>{if(!done&&tk===token&&!synth.speaking)fin()},1500); // voice failed silently
+    setTimeout(fin,est*2.4+2500);
+  }else setTimeout(fin,est);
+})}
+
+/* ---------- cell helpers ---------- */
+const col2n=c=>[...c].reduce((n,ch)=>n*26+ch.charCodeAt(0)-64,0);
+function ref(r){const m=/^([A-Z]+)(\d+)$/.exec(r);return[col2n(m[1])-1,+m[2]-1]}
+function rng(s){const[a,b]=s.split(":");const[c0,r0]=ref(a);const[c1,r1]=b?ref(b):[c0,r0];return[Math.min(c0,c1),Math.min(r0,r1),Math.max(c0,c1),Math.max(r0,r1)]}
+const wlen=s=>[...String(s)].reduce((a,c)=>a+(c.charCodeAt(0)<128?.56:1),0);
+function distAt(i,ni,nc){return nc>ni?Math.min(nc-1,1+Math.floor(i*(nc-1)/ni)):Math.floor(i*nc/ni)}
+
+/* ---------- formula coloring ---------- */
+function colorFormula(f,steps){let s=esc(f);const seen=[];(steps||[]).forEach(st=>{if(!seen.includes(st.range))seen.push(st.range)});
+  seen.sort((a,b)=>b.length-a.length);const marks=[];
+  seen.forEach(rg=>{const st=steps.find(x=>x.range===rg);const re=new RegExp("(?<![A-Z$])"+rg.replace(/[$]/g,"\\$")+"(?![0-9:])","g");
+    s=s.replace(re,m=>{marks.push(`<span style="color:${KC[st.color%6]};background:${KC[st.color%6]}22;border-radius:8px;padding:0 4px">${m}</span>`);return`\u0001${marks.length-1}\u0002`})});
+  return s.replace(/\u0001(\d+)\u0002/g,(_,i)=>marks[i]).replace(/^=([A-Z.]+)/,'=<span style="color:var(--c1)">$1</span>')}
+
+/* ---------- slide renderers ---------- */
+function hero(){const e=esc(L.emoji);return`<svg class="hero" viewBox="0 0 560 400">
+ <defs><linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="${cat[0]}"/><stop offset="1" stop-color="${cat[1]}"/></linearGradient></defs>
+ <g class="float"><rect x="40" y="40" width="480" height="320" rx="30" fill="#fff" stroke="url(#hg)" stroke-width="10"/>
+ <rect x="40" y="40" width="480" height="60" rx="30" fill="url(#hg)"/><rect x="40" y="70" width="480" height="30" fill="url(#hg)"/>
+ ${[0,1,2,3].map(r=>[0,1,2,3].map(c=>`<rect x="${70+c*108}" y="${120+r*56}" width="96" height="44" rx="8" fill="${(r+c)%3?"#f1f5f9":cat[1]+"55"}"><animate attributeName="opacity" values="1;.4;1" dur="${2+((r*4+c)%5)*.4}s" repeatCount="indefinite"/></rect>`).join("")).join("")}
+ <text x="80" y="82" font-size="30" font-weight="900" fill="#fff" font-family="Consolas,monospace">fx</text></g>
+ <g style="animation:float 2.4s ease-in-out infinite .4s"><circle cx="440" cy="300" r="86" fill="#fff" stroke="url(#hg)" stroke-width="10"/>
+ <text x="440" y="330" font-size="90" text-anchor="middle">${e}</text></g></svg>`}
+
+function rTitle(s){return`<div class="slide title">${hero()}
+ <div class="fx r" data-at="0">${esc(L.id)}</div><div class="sub r" data-at="0">${esc(L.zh)}</div>
+ <div class="chips r" data-at="${Math.min(1,s.say.length-1)}"><span class="chip">📂 ${cat[2]}</span><span class="chip">${"⭐".repeat(L.level||1)} 難度</span><span class="chip">🧩 ${esc(L.version||"")}</span></div>
+ <div class="syn r" data-at="${Math.min(2,s.say.length-1)}">${esc(L.syntax)}</div></div>`}
+function head(s,i){return`<h2><span class="n">${i}</span>${esc(s.title||"")}</h2>`}
+function rConcept(s,i){const n=s.points.length;return`<div class="slide">${head(s,i)}<div class="pts">${s.points.map((p,k)=>`<div class="pt r" data-at="${s.at?s.at[k]:distAt(k,n,s.say.length)}"><span class="ic">${esc(p.icon)}</span><span>${esc(p.text)}</span></div>`).join("")}</div></div>`}
+function rSyntax(s,i){const fn=(s.formula||L.syntax).match(/^=?\s*([A-Z0-9.]+)/)[1];const n=s.args.length;
+  return`<div class="slide${n>=5?" many":""}">${head(s,i)}<div class="formula r on"><span class="fn">=${esc(fn)}(</span>${s.args.map((a,k)=>`<span class="argc" style="background:${KC[k%6]}">${a.req?"":"["}${esc(a.name)}${a.req?"":"]"}</span>${k<n-1?",":""}`).join("")}<span class="fn">)</span></div>
+  <div class="args">${s.args.map((a,k)=>`<div class="arg r" data-at="${s.at?s.at[k]:distAt(k,n,s.say.length)}"><span class="nm" style="background:${KC[k%6]}">${esc(a.name)}</span><span class="zh">${esc(a.zh)}</span><span class="bd ${a.req?"req":"opt"}">${a.req?"必填":"選填"}</span></div>`).join("")}</div></div>`}
+function rSheet(s,i){const d=s.data,W=d[0].length,H=d.length;const RW=58,HH=56,TW=980;const cw=Math.min(240,(TW-RW)/W);const ch=Math.max(60,Math.min(104,Math.floor(760/H)));
+  const w=RW+cw*W,h=HH+ch*H;const X=c=>RW+c*cw,Y=r=>HH+r*ch;
+  const fs=(t,max)=>Math.max(18,Math.min(max,(cw-14)/Math.max(1,wlen(t))));
+  const [fc,fr]=ref(s.cell);let g=`<svg class="sheet" viewBox="0 0 ${w} ${h}" style="max-height:880px">`;
+  g+=`<rect width="${w}" height="${h}" rx="14" fill="#fff" stroke="#94a3b8" stroke-width="3"/><rect width="${w}" height="${HH}" fill="#e2e8f0"/><rect width="${RW}" height="${h}" fill="#e2e8f0"/>`;
+  for(let c=0;c<W;c++){g+=`<text x="${X(c)+cw/2}" y="${HH/2+11}" text-anchor="middle" font-size="30" font-weight="800" fill="#475569">${String.fromCharCode(65+c)}</text>`}
+  for(let r=0;r<H;r++){g+=`<text x="${RW/2}" y="${Y(r)+ch/2+10}" text-anchor="middle" font-size="28" font-weight="800" fill="#475569">${r+1}</text>`;
+    for(let c=0;c<W;c++){const v=d[r][c];const isH=r===0&&v!=="";g+=`<rect x="${X(c)}" y="${Y(r)}" width="${cw}" height="${ch}" fill="${isH?cat[0]+"1f":"#fff"}" stroke="#cbd5e1" stroke-width="1.5"/>`;
+      if(v!=="")g+=`<text x="${X(c)+cw/2}" y="${Y(r)+ch/2+fs(v,36)*.36}" text-anchor="middle" font-size="${fs(v,36)}" font-weight="${isH?900:700}" fill="#0f172a" xml:space="preserve">${esc(v)}</text>`}}
+  // formula cell marker
+  g+=`<rect x="${X(fc)+2}" y="${Y(fr)+2}" width="${cw-4}" height="${ch-4}" fill="#fde04755" stroke="#16a34a" stroke-width="6"/>`;
+  (s.steps||[]).forEach(st=>{const[c0,r0,c1,r1]=rng(st.range);const k=KC[st.color%6];const x=X(c0),y=Y(r0),ww=(c1-c0+1)*cw,hh=(r1-r0+1)*ch;
+    g+=`<g class="hl r" data-at="${st.at}"><rect x="${x+3}" y="${y+3}" width="${ww-6}" height="${hh-6}" rx="8" fill="${k}26" stroke="${k}" stroke-width="7" stroke-dasharray="16 12" class="ants"/>`;
+    g+=`</g>`});
+  const res=s.result||[];const rr=res.length,rc=res[0]?res[0].length:0;
+  g+=`<g class="res" data-at="${s.resultAt??s.say.length-1}">`;
+  res.forEach((row,dr)=>row.forEach((v,dc)=>{const x=X(fc+dc),y=Y(fr+dr);g+=`<rect x="${x+3}" y="${y+3}" width="${cw-6}" height="${ch-6}" rx="6" fill="#dcfce7"/><text x="${x+cw/2}" y="${y+ch/2+fs(v,36)*.36}" text-anchor="middle" font-size="${fs(v,36)}" font-weight="900" fill="#15803d" xml:space="preserve">${esc(v)}</text>`}));
+  if(rr*rc>1)g+=`<rect x="${X(fc)}" y="${Y(fr)}" width="${rc*cw}" height="${rr*ch}" fill="none" stroke="#2563eb" stroke-width="4" stroke-dasharray="10 8"/>`;
+  g+=`<rect x="${X(fc)+2}" y="${Y(fr)+2}" width="${cw-4}" height="${ch-4}" fill="none" stroke="#16a34a" stroke-width="6"/></g></svg>`;
+  return`<div class="slide">${head(s,i)}<div class="fbar"><span class="nb">${esc(s.cell)}</span><span class="fxi">fx</span><span class="ft" data-f="${esc(s.formula)}"></span></div>
+   <div class="sheetwrap">${g}<div class="legend">${(s.steps||[]).filter(st=>st.tag).map(st=>`<span class="lg r" data-at="${st.at}" style="--k:${KC[st.color%6]}"><i></i>${esc(st.tag)}</span>`).join("")}</div>${s.note?`<div class="note r" data-at="${s.resultAt??s.say.length-1}">💡 ${esc(s.note)}</div>`:""}</div></div>`}
+function rFlow(s,i){const n=s.steps.length;return`<div class="slide">${head(s,i)}<div class="flow">${s.steps.map((p,k)=>{const a=s.at?s.at[k]:distAt(k,n,s.say.length);return`${k?`<div class="arrow r" data-at="${a}">⬇</div>`:""}<div class="fl r" data-at="${a}"><span class="ic">${esc(p.icon)}</span><span>${esc(p.text)}</span></div>`}).join("")}</div></div>`}
+function rCompare(s,i){const n=s.rows.length;return`<div class="slide">${head(s,i)}<div style="flex:1;display:flex;align-items:center"><table class="cmp"><tr>${s.head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr>${s.rows.map((r,k)=>`<tr class="r" data-at="${s.at?s.at[k]:distAt(k,n,s.say.length)}">${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</table></div></div>`}
+function rTips(s,i){const n=s.items.length;return`<div class="slide">${head(s,i)}<div class="tips">${s.items.map((t,k)=>`<div class="tip r" data-at="${s.at?s.at[k]:distAt(k,n,s.say.length)}"><span class="ic">${esc(t.icon)}</span><div><b>${esc(t.title)}</b><span>${esc(t.text)}</span></div></div>`).join("")}</div></div>`}
+function rQuiz(s,i){const n=s.say.length;const q=esc(s.q).replace(/(=[A-Z.]+\([^)]*\)[^ ，？]*)/g,"<code>$1</code>");
+  return`<div class="slide" data-quiz="1">${head(s,i)}<div class="q r on">❓ ${q}</div>
+  <div class="opts r" data-at="${Math.min(1,n-1)}">${s.options.map((o,k)=>`<button class="opt" data-k="${k}"><span class="l">${"ABCD"[k]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+  <svg class="timer r" data-at="${Math.max(0,n-2)}" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="#fff" stroke="#e2e8f0" stroke-width="12"/><circle class="p" cx="60" cy="60" r="50" fill="none" stroke="${cat[0]}" stroke-width="12" stroke-dasharray="314" stroke-dashoffset="0" transform="rotate(-90 60 60)" stroke-linecap="round"/><text x="60" y="76" text-anchor="middle" font-size="46" font-weight="900" fill="#0f172a">?</text></svg>
+  <div class="exp r" data-at="${n-1}" data-ans="${s.answer}">✅ ${esc(s.explain)}</div></div>`}
+function rRecap(s,i){const n=s.items.length;return`<div class="slide">${head(s,i)}<div class="recap">${s.items.map((t,k)=>`<div class="rc r" data-at="${s.at?s.at[k]:distAt(k,n,s.say.length)}"><span class="ck">✔</span><span>${esc(t)}</span></div>`).join("")}</div><div class="stars r" data-at="${s.say.length-1}"><span>⭐</span><span>🏆</span><span>⭐</span></div></div>`}
+const R={title:rTitle,concept:rConcept,syntax:rSyntax,sheet:rSheet,flow:rFlow,compare:rCompare,tips:rTips,quiz:rQuiz,recap:rRecap};
+
+/* ---------- player ---------- */
+const S=L.slides, TR=["fade","slide","flip","circle","up"];
+let si=-1,ci=0,playing=false,cur=null,typer=null;
+$("#dots").innerHTML=S.map((_,k)=>`<i data-k="${k}"></i>`).join("");
+$("#dots").onclick=e=>{const k=e.target.dataset.k;if(k!=null)jump(+k)};
+const totalChunks=S.reduce((a,s)=>a+s.say.length,0);
+function progress(){let d=0;for(let k=0;k<si;k++)d+=S[k].say.length;d+=ci;$("#bar i").style.width=(100*d/totalChunks)+"%";
+  [...$("#dots").children].forEach((e,k)=>{e.classList.toggle("on",k<si);e.classList.toggle("cur",k===si)})}
+function showSlide(k,anim=true){const old=cur;const wrap=document.createElement("div");wrap.innerHTML=R[S[k].type](S[k],k);const el=wrap.firstElementChild;
+  $("#slides").appendChild(el);cur=el;const t=TR[k%TR.length];
+  if(old&&anim){el.classList.add("in-"+t);old.classList.add("out-"+t);sfx.whoosh();setTimeout(()=>old.remove(),950)}else if(old)old.remove();
+  const ft=el.querySelector(".ft");clearInterval(typer);
+  if(ft){const f=ft.dataset.f;const st=S[k].steps||[];let n=0;typer=setInterval(()=>{n=Math.min(f.length,n+2);ft.innerHTML=(n<f.length?esc(f.slice(0,n)):colorFormula(f,st))+'<span class="cur"></span>';if(n>=f.length)clearInterval(typer)},45)}
+  el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(el,+b.dataset.k,true));
+  $("#spk").classList.add("point");setTimeout(()=>$("#spk").classList.remove("point"),1200)}
+function reveal(upto){if(!cur)return;cur.querySelectorAll("[data-at]").forEach(e=>{const on=+e.dataset.at<=upto;if(on&&!e.classList.contains("on")){e.classList.add("on");if(e.matches(".res"))sfx.ok();else sfx.pop()}});
+  const ex=cur.querySelector(".exp");if(ex&&ex.classList.contains("on"))answer(cur,+ex.dataset.ans,false);
+  const tm=cur.querySelector(".timer");if(tm&&tm.classList.contains("on")&&!tm.dataset.go){tm.dataset.go=1;const p=tm.querySelector(".p");let sec=3;const txt=tm.querySelector("text");const iv=setInterval(()=>{if(!cur.contains(tm)){clearInterval(iv);return}txt.textContent=sec;sfx.tick();p.style.strokeDashoffset=314*(1-sec/3);if(--sec<0){clearInterval(iv);txt.textContent="⏰"}},800)}}
+function answer(el,k,user){if(el.dataset.done&&user)return;const ans=+el.querySelector(".exp").dataset.ans;
+  el.querySelectorAll(".opt").forEach(b=>{const j=+b.dataset.k;b.classList.toggle("right",j===ans);b.classList.toggle("wrong",j===k&&j!==ans)});
+  if(user){el.dataset.done=1;k===ans?(sfx.ok(),confetti()):sfx.no()}}
+function setCap(t){const c=$("#capbox");c.classList.toggle("off",!ccOn||!t);c.textContent=t||"";c.classList.remove("pop");void c.offsetWidth;c.classList.add("pop")}
+async function run(){const tk=++token;
+  while(playing&&tk===token){if(si<0||si>=S.length)break;
+    const s=S[si];reveal(ci);progress();setCap(s.say[ci]);
+    await speak(s.say[ci],tk);if(tk!==token||!playing)return;
+    await new Promise(r=>setTimeout(r,280));if(tk!==token||!playing)return;
+    if(ci+1<s.say.length)ci++;else if(si+1<S.length){si++;ci=0;showSlide(si);await new Promise(r=>setTimeout(r,650));if(tk!==token)return}else{finish();return}}}
+function stopSpeech(){token++;if(synth)try{synth.cancel()}catch(e){}talk(false)}
+function play(){if(playing)return;playing=true;$("#bPlay").textContent="⏸";run()}
+function pause(){playing=false;stopSpeech();$("#bPlay").textContent="▶"}
+function jump(k){stopSpeech();k=Math.max(0,Math.min(S.length-1,k));const d=k!==si;si=k;ci=0;showSlide(si,d);reveal(0);progress();setCap(S[si].say[0]);$("#end").hidden=true;if(playing){playing=false;play()}}
+function finish(){playing=false;$("#bPlay").textContent="▶";$("#bar i").style.width="100%";setCap("");confetti();sfx.ok();
+  try{const w=JSON.parse(localStorage.getItem("xlfx-watched")||"{}");w[L.id]=Date.now();localStorage.setItem("xlfx-watched",JSON.stringify(w))}catch(e){}
+  try{parent.postMessage({xlfx:"done",id:L.id},"*")}catch(e){}
+  setTimeout(()=>{$("#end").hidden=false},900)}
+$("#eTxt").textContent=`你已完成 ${L.id} 函數的教學影片`;
+if(NAV&&NAV.next){$("#aNext").href=NAV.next.id+".html";$("#aNext").textContent=`下一個：${NAV.next.id} ➜`}else $("#aNext").remove();
+$("#bStart").onclick=()=>{$("#start").hidden=true;if(synth){try{synth.cancel();const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u)}catch(e){}}pickVoice();jump(0);setTimeout(play,300)};
+$("#bAgain").onclick=()=>{$("#end").hidden=true;jump(0);play()};
+$("#bPlay").onclick=()=>playing?pause():play();
+$("#bPrev").onclick=()=>jump(si-1);$("#bNext").onclick=()=>jump(si+1);
+$("#bHome").onclick=()=>{if(inFrame)parent.postMessage({xlfx:"close"},"*");else location.href="../index.html"};
+$("#bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const f=(e.clientX-r.left)/r.width;let n=Math.floor(f*totalChunks),k=0;while(k<S.length-1&&n>=S[k].say.length){n-=S[k].say.length;k++}jump(k)};
+function syncBtns(){$("#bCC").classList.toggle("offb",!ccOn);$("#bVoice").classList.toggle("offb",!voiceOn);$("#bVoice").textContent=voiceOn?"🗣️":"🔇";$("#bRate").textContent=rate.toFixed(2).replace(/0$/,"")+"×"}
+$("#bCC").onclick=()=>{ccOn=!ccOn;saveP();syncBtns();setCap(S[si]?S[si].say[ci]:"")};
+$("#bVoice").onclick=()=>{voiceOn=!voiceOn;saveP();syncBtns();if(playing){stopSpeech();playing=false;play()}};
+$("#bRate").onclick=()=>{const rs=[1,1.15,1.3,0.9];rate=rs[(rs.indexOf(rate)+1)%rs.length]||1.15;saveP();syncBtns()};
+syncBtns();
+addEventListener("keydown",e=>{if(e.key===" "){e.preventDefault();if(!$("#start").hidden)$("#bStart").click();else playing?pause():play()}else if(e.key==="ArrowRight")jump(si+1);else if(e.key==="ArrowLeft")jump(si-1)});
+addEventListener("message",e=>{const d=e.data||{};if(d.xlfx==="pause")pause();if(d.xlfx==="sound"){sfxOn=d.on}});
+addEventListener("storage",e=>{if(e.key==="xlfx-sound")sfxOn=e.newValue!=="off"});
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&playing)pause()});
+/* preview title slide behind the start overlay */
+si=0;showSlide(0,false);reveal(99);progress();
+
+/* ---------- confetti ---------- */
+function confetti(){const cv=$("#confetti"),x=cv.getContext("2d");const ps=Array.from({length:140},()=>({x:540,y:900,vx:(Math.random()-.5)*34,vy:-Math.random()*36-8,c:KC[Math.random()*6|0],s:10+Math.random()*16,r:Math.random()*6}));let f=0;
+  (function step(){x.clearRect(0,0,1080,1920);ps.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=1.1;p.r+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);x.restore()});if(++f<110)requestAnimationFrame(step);else x.clearRect(0,0,1080,1920)})()}
+</script>
+</body>
+</html>

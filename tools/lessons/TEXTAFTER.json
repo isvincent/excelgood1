@@ -1,0 +1,177 @@
+{
+  "id": "TEXTAFTER",
+  "cat": "text",
+  "emoji": "⏩",
+  "zh": "取出符號後的文字",
+  "en": "Get the text after a delimiter",
+  "desc": "找到指定的分隔符號，傳回它後面的文字，可指定第幾個符號、從後面找，適合取網域、副檔名。",
+  "descEn": "Returns the text that occurs after a given delimiter, with options for which occurrence to use.",
+  "syntax": "=TEXTAFTER(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])",
+  "keywords": ["擷取文字", "分隔符號", "符號後", "網域", "副檔名"],
+  "level": 2,
+  "version": "Microsoft 365 / Excel 2024 以上",
+  "slides": [
+    {
+      "type": "title",
+      "say": [
+        "哈囉大家好，歡迎來到 Excel 函數教室！",
+        "今天要介紹的是 TEXTAFTER 函數。",
+        "它和 TEXTBEFORE 剛好相反，",
+        "專門取出符號後面的文字。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "它能做什麼？",
+      "points": [
+        {"icon": "📄", "text": "給它一段文字"},
+        {"icon": "📌", "text": "指定一個分隔符號"},
+        {"icon": "⏩", "text": "傳回符號後面的文字"}
+      ],
+      "say": [
+        "TEXTAFTER 一樣是在符號的位置下刀。",
+        "你先給它一段文字，",
+        "再告訴它要找哪一個符號，",
+        "這次它會把符號後面的部分交給你。"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "formula": "=TEXTAFTER(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])",
+      "args": [
+        {"name": "text", "zh": "原本的文字", "req": true},
+        {"name": "delimiter", "zh": "分隔符號", "req": true},
+        {"name": "instance_num", "zh": "第幾個符號，負數從後面數", "req": false},
+        {"name": "match_mode", "zh": "0 分大小寫，1 不分", "req": false},
+        {"name": "match_end", "zh": "是否把結尾當成符號", "req": false},
+        {"name": "if_not_found", "zh": "找不到時顯示的內容", "req": false}
+      ],
+      "say": [
+        "TEXTAFTER 的語法和 TEXTBEFORE 完全一樣。",
+        "前兩個必填，分別是文字和分隔符號。",
+        "第三個引數指定第幾個符號，負數就從後面數。",
+        "第四、第五個調整比對方式，平常省略就好。",
+        "第六個可以設定找不到符號時要顯示什麼。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：Email 取網域",
+      "data": [
+        ["Email", "網域"],
+        ["amy@ymhs.tw", ""],
+        ["tom@gmail.com", ""],
+        ["s1120301@ymhs.tw", ""]
+      ],
+      "cell": "B2",
+      "formula": "=TEXTAFTER(A2:A4,\"@\")",
+      "result": [["ymhs.tw"], ["gmail.com"], ["ymhs.tw"]],
+      "steps": [
+        {"at": 1, "range": "A2:A4", "color": 0, "tag": "Email"}
+      ],
+      "resultAt": 3,
+      "say": [
+        "第一個例子，從 Email 取出網域。",
+        "文字選 A2 到 A4，",
+        "分隔符號一樣是小老鼠。",
+        "小老鼠後面的網域，就全部取出來了！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：取副檔名",
+      "data": [
+        ["檔名", "副檔名"],
+        ["報告.docx", ""],
+        ["期末.v2.xlsx", ""],
+        ["photo.2025.jpg", ""]
+      ],
+      "cell": "B2",
+      "formula": "=TEXTAFTER(A2:A4,\".\",-1)",
+      "result": [["docx"], ["xlsx"], ["jpg"]],
+      "steps": [
+        {"at": 1, "range": "A3:A4", "color": 3, "tag": "好幾個點"},
+        {"at": 2, "range": "A2:A4", "color": 0, "tag": "最後一個點"}
+      ],
+      "resultAt": 3,
+      "note": "副檔名長短不同也不怕，不用數字數",
+      "say": [
+        "第二個例子，取出檔案的副檔名。",
+        "檔名裡可能有好幾個點，",
+        "所以第三個引數填負 1，從最後一個點來切。",
+        "docx、xlsx、jpg，不管幾個字都正確！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：取第 2 個符號後",
+      "data": [
+        ["產品代碼", "流水號"],
+        ["TW-2024-A01", ""],
+        ["JP-2023-B12", ""],
+        ["US-2025-C07", ""]
+      ],
+      "cell": "B2",
+      "formula": "=TEXTAFTER(A2:A4,\"-\",2)",
+      "result": [["A01"], ["B12"], ["C07"]],
+      "steps": [
+        {"at": 1, "range": "A2:A4", "color": 0, "tag": "產品代碼"}
+      ],
+      "resultAt": 3,
+      "say": [
+        "第三個例子，產品代碼裡有兩條橫線。",
+        "我們想要的是最後面的流水號，",
+        "所以第三個引數填 2，從第二條橫線後面開始取。",
+        "A01、B12、C07，流水號就拿到了！"
+      ]
+    },
+    {
+      "type": "tips",
+      "title": "注意事項",
+      "items": [
+        {"icon": "⚠️", "title": "#N/A 錯誤", "text": "找不到符號時出現，可用第 6 引數處理"},
+        {"icon": "🔠", "title": "大小寫", "text": "預設分大小寫，第 4 引數填 1 不分"},
+        {"icon": "🆕", "title": "版本限制", "text": "需要 Microsoft 365 或 Excel 2024"}
+      ],
+      "say": [
+        "使用 TEXTAFTER 有幾個小提醒。",
+        "找不到符號時會出現 #N/A，可以用第六個引數處理。",
+        "它預設會分大小寫，第四個引數填 1 就不分了。",
+        "另外，它只有新版的 Excel 才能使用喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "q": "=TEXTAFTER(\"A-B-C\",\"-\",2) 會得到？",
+      "options": ["C", "B-C", "B", "A-B"],
+      "answer": 0,
+      "explain": "傳回第 2 個橫線後面的文字，也就是 C",
+      "say": [
+        "來個小測驗！",
+        "對 A-B-C 使用 TEXTAFTER，分隔符號是橫線，",
+        "第三個引數填 2，會得到什麼呢？",
+        "給你三秒鐘想一想。",
+        "答案是 C！第二條橫線後面只剩下 C。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "傳回分隔符號後的文字",
+        "負數從最後一個符號找",
+        "可指定第幾個符號",
+        "與 TEXTBEFORE 成對使用"
+      ],
+      "say": [
+        "最後來複習一下。",
+        "TEXTAFTER 會傳回分隔符號後面的文字，",
+        "第三個引數可以指定第幾個，負數就從後面找。",
+        "它和 TEXTBEFORE 搭配，切文字超方便。",
+        "快打開 Excel 練習看看吧，我們下次見！"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="system" data-device="auto" data-layout="auto" data-font="m">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Excel 函數動畫教室</title>
+<meta name="description" content="39 個常用 Excel 函數的 9:16 自動播放教學影片：語音旁白、逐字字幕、動畫講者與互動試算表示範。分類檢索、遊戲測驗、PWA 離線可用。">
+<meta name="theme-color" content="#7c3aed">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#grid" data-i18n="skip">跳到函數列表</a>
+<header class="top">
+  <div class="shell top-in">
+    <a class="logo" href="#" aria-label="home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="16" fill="#16a34a"/><path d="M18 18h28v28H18z" fill="#fff" opacity=".2"/><text x="32" y="44" text-anchor="middle" font-size="30" font-weight="900" fill="#fff" font-family="Consolas,monospace">fx</text></svg>
+      <span><b data-i18n="title">Excel 函數動畫教室</b><small data-i18n="subtitle">39 支 9:16 語音教學影片</small></span>
+    </a>
+    <div class="search">
+      <span aria-hidden="true">🔍</span>
+      <input id="q" type="search" autocomplete="off" data-i18n-ph="searchPh" placeholder="搜尋函數、用途、關鍵字…（按 / ）">
+      <button id="qClear" class="ghost" aria-label="clear" hidden>✕</button>
+    </div>
+    <button id="bSet" class="round" aria-label="settings" title="顯示與操作設定">⚙️</button>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="hero">
+    <div class="hero-txt">
+      <h1><span data-i18n="heroA">看影片，</span><span class="grad" data-i18n="heroB">輕鬆學會 Excel 函數</span></h1>
+      <p data-i18n="heroP">每支影片都有小薇老師的語音解說、逐句字幕、試算表動畫示範與隨堂小測驗。挑一個函數，按下播放就開始！</p>
+      <div class="hero-btns">
+        <button id="bRandom" class="btn pri">🎲 <span data-i18n="random">隨機來一支</span></button>
+        <button id="bContinue" class="btn">▶ <span data-i18n="continue">接著看下一支</span></button>
+        <a href="#game" class="btn">🎮 <span data-i18n="playGame">函數小遊戲</span></a>
+      </div>
+      <div class="stats">
+        <div><b id="stFn">39</b><span data-i18n="stFn">個函數</span></div>
+        <div><b id="stCat">7</b><span data-i18n="stCat">大類別</span></div>
+        <div><b id="stMin">0</b><span data-i18n="stMin">分鐘影片</span></div>
+        <div class="ring"><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="32" class="rb"/><circle id="ringP" cx="40" cy="40" r="32" class="rp"/></svg><b id="stDone">0</b><span data-i18n="stDone">已看完</span></div>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 420 420">
+        <defs><linearGradient id="g1" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#7c3aed"/><stop offset=".5" stop-color="#ec4899"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs>
+        <rect x="70" y="20" width="280" height="390" rx="36" fill="url(#g1)"/>
+        <rect x="88" y="40" width="244" height="300" rx="22" fill="#fff"/>
+        <g class="cells">
+          <rect x="104" y="60" width="66" height="34" rx="6" fill="#dbeafe"/><rect x="178" y="60" width="66" height="34" rx="6" fill="#fde68a"/><rect x="252" y="60" width="66" height="34" rx="6" fill="#dcfce7"/>
+          <rect x="104" y="102" width="66" height="34" rx="6" fill="#f1f5f9"/><rect x="178" y="102" width="66" height="34" rx="6" fill="#fbcfe8"/><rect x="252" y="102" width="66" height="34" rx="6" fill="#f1f5f9"/>
+          <rect x="104" y="144" width="66" height="34" rx="6" fill="#e0e7ff"/><rect x="178" y="144" width="66" height="34" rx="6" fill="#f1f5f9"/><rect x="252" y="144" width="66" height="34" rx="6" fill="#fed7aa"/>
+        </g>
+        <rect x="104" y="196" width="214" height="44" rx="10" fill="#0f172a"/><text x="116" y="226" fill="#fde047" font-size="22" font-weight="900" font-family="Consolas,monospace" id="heroFx">=XLOOKUP(…)</text>
+        <circle cx="210" cy="292" r="34" fill="url(#g1)"/><path d="M200 274 L228 292 L200 310Z" fill="#fff"/>
+        <circle cx="210" cy="378" r="10" fill="#fff" opacity=".7"/>
+        <g class="orb o1"><circle cx="40" cy="90" r="30" fill="#fde047"/><text x="40" y="101" text-anchor="middle" font-size="30">Σ</text></g>
+        <g class="orb o2"><circle cx="385" cy="150" r="28" fill="#22d3ee"/><text x="385" y="160" text-anchor="middle" font-size="26">🔎</text></g>
+        <g class="orb o3"><circle cx="372" cy="330" r="26" fill="#a3e635"/><text x="372" y="339" text-anchor="middle" font-size="24">📅</text></g>
+        <g class="orb o4"><circle cx="40" cy="300" r="26" fill="#fb7185"/><text x="40" y="309" text-anchor="middle" font-size="24">🔤</text></g>
+      </svg>
+    </div>
+  </section>
+
+  <section class="catmap" aria-label="categories">
+    <h2 class="sec">🗂️ <span data-i18n="cats">函數分類</span></h2>
+    <div id="cats" class="cats"></div>
+  </section>
+
+  <section class="toolbar">
+    <div class="seg" id="lvSeg">
+      <button data-lv="0" class="on" data-i18n="lvAll">全部難度</button>
+      <button data-lv="1">⭐ <span data-i18n="lv1">入門</span></button>
+      <button data-lv="2">⭐⭐ <span data-i18n="lv2">進階</span></button>
+      <button data-lv="3">⭐⭐⭐ <span data-i18n="lv3">高手</span></button>
+    </div>
+    <div class="tool-r">
+      <label class="chk"><input type="checkbox" id="onlyFav"> ❤️ <span data-i18n="onlyFav">只看收藏</span></label>
+      <select id="sort" aria-label="sort">
+        <option value="def" data-i18n="sortDef">原始順序</option>
+        <option value="az" data-i18n="sortAz">名稱 A→Z</option>
+        <option value="lv" data-i18n="sortLv">難度由淺到深</option>
+        <option value="new" data-i18n="sortNew">未看過優先</option>
+      </select>
+    </div>
+  </section>
+  <p id="count" class="count" aria-live="polite"></p>
+  <section id="grid" class="grid"></section>
+  <p id="empty" class="empty" hidden>😢 <span data-i18n="empty">找不到符合的函數，換個關鍵字試試！</span></p>
+
+  <section id="game" class="game">
+    <h2 class="sec">🎮 <span data-i18n="game">函數小遊戲</span></h2>
+    <div class="seg" id="gmSeg">
+      <button data-g="who" class="on">🕵️ <span data-i18n="gWho">猜猜我是誰</span></button>
+      <button data-g="quiz">📝 <span data-i18n="gQuiz">影片隨堂考</span></button>
+      <button data-g="syn">🧩 <span data-i18n="gSyn">語法配對</span></button>
+    </div>
+    <div class="gbox">
+      <div class="ghead"><span id="gScore">⭐ 0</span><span id="gStreak">🔥 0</span><span id="gNum">1 / 10</span></div>
+      <div id="gQ" class="gq"></div>
+      <div id="gOpts" class="gopts"></div>
+      <div id="gFb" class="gfb" aria-live="polite"></div>
+      <button id="gNext" class="btn pri" hidden data-i18n="next">下一題 ➜</button>
+    </div>
+  </section>
+</main>
+
+<footer class="foot shell">
+  <p data-i18n="foot">影片使用瀏覽器內建語音（建議 Edge / Chrome，會自動選用中文女聲）。可安裝成 App 離線觀看。</p>
+  <p class="small">© Excel 函數動畫教室 · <a href="README.md">README</a></p>
+</footer>
+
+<!-- player modal -->
+<div id="pm" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="pmT">
+  <div class="pm-box">
+    <div class="pm-bar">
+      <button id="pmPrev" class="round" aria-label="previous">◀</button>
+      <b id="pmT"></b>
+      <button id="pmNext" class="round" aria-label="next">▶</button>
+      <a id="pmOpen" class="round" target="_blank" rel="noopener" aria-label="open in new tab" title="新分頁開啟">↗</a>
+      <button id="pmClose" class="round" aria-label="close">✕</button>
+    </div>
+    <div class="pm-main">
+      <div class="pm-frame"><iframe id="pmF" title="video" allow="fullscreen; autoplay"></iframe></div>
+      <aside class="pm-info" id="pmInfo"></aside>
+    </div>
+  </div>
+</div>
+
+<!-- settings -->
+<div id="sp" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="spT">
+  <div class="sp-box">
+    <div class="sp-head"><h2 id="spT">⚙️ <span data-i18n="settings">顯示與操作設定</span></h2><button id="spClose" class="round" aria-label="close">✕</button></div>
+    <div class="set"><span>🖥️ <b data-i18n="sFull">全螢幕</b></span><div class="seg" data-set="full"><button data-v="on" data-i18n="on">開啟</button><button data-v="off" data-i18n="off">關閉</button></div></div>
+    <div class="set"><span>🔊 <b data-i18n="sSound">音效</b></span><div class="seg" data-set="sound"><button data-v="on" data-i18n="on">開啟</button><button data-v="off" data-i18n="off">關閉</button></div></div>
+    <div class="set"><span>📱 <b data-i18n="sDevice">裝置</b></span><div class="seg" data-set="device"><button data-v="auto" data-i18n="auto">自動</button><button data-v="phone" data-i18n="phone">手機</button><button data-v="tablet" data-i18n="tablet">平板</button><button data-v="desktop" data-i18n="desktop">電腦</button></div></div>
+    <div class="set"><span>🔄 <b data-i18n="sLayout">版面</b></span><div class="seg" data-set="layout"><button data-v="auto" data-i18n="auto">自動</button><button data-v="portrait" data-i18n="portrait">直式</button><button data-v="landscape" data-i18n="landscape">橫式</button></div></div>
+    <div class="set"><span>🌐 <b data-i18n="sLang">語言</b></span><div class="seg" data-set="lang"><button data-v="zh">繁體中文</button><button data-v="en">English</button></div></div>
+    <div class="set"><span>🔠 <b data-i18n="sFont">字體</b></span><div class="seg" data-set="font"><button data-v="s" data-i18n="fs">縮小</button><button data-v="m" data-i18n="fm">標準</button><button data-v="l" data-i18n="fl">放大</button></div></div>
+    <div class="set"><span>🎨 <b data-i18n="sTheme">色系</b></span><div class="seg" data-set="theme"><button data-v="system" data-i18n="system">跟隨系統</button><button data-v="light" data-i18n="light">亮色</button><button data-v="dark" data-i18n="dark">暗色</button></div></div>
+    <div class="sp-foot"><button id="spReset" class="btn" data-i18n="reset">↺ 恢復預設</button><button id="spInstall" class="btn pri" hidden data-i18n="install">📲 安裝 App</button></div>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

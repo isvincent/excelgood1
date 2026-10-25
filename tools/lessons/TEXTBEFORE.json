@@ -1,0 +1,182 @@
+{
+  "id": "TEXTBEFORE",
+  "cat": "text",
+  "emoji": "⏪",
+  "zh": "取出符號前的文字",
+  "en": "Get the text before a delimiter",
+  "desc": "找到指定的分隔符號，傳回它前面的文字，可指定第幾個符號、從後面找，或自訂找不到時的結果。",
+  "descEn": "Returns the text that occurs before a given delimiter, with options for which occurrence to use.",
+  "syntax": "=TEXTBEFORE(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])",
+  "keywords": ["擷取文字", "分隔符號", "符號前", "Email 帳號", "主檔名"],
+  "level": 2,
+  "version": "Microsoft 365 / Excel 2024 以上",
+  "slides": [
+    {
+      "type": "title",
+      "say": [
+        "哈囉大家好，歡迎來到 Excel 函數教室！",
+        "今天要介紹的是 TEXTBEFORE 函數。",
+        "只要告訴它一個符號，",
+        "它就能把符號前面的文字切出來。"
+      ]
+    },
+    {
+      "type": "concept",
+      "title": "它能做什麼？",
+      "points": [
+        {"icon": "📄", "text": "給它一段文字"},
+        {"icon": "📌", "text": "指定一個分隔符號"},
+        {"icon": "⏪", "text": "傳回符號前面的文字"}
+      ],
+      "say": [
+        "TEXTBEFORE 就像在符號的位置下刀。",
+        "你先給它一段文字，",
+        "再告訴它要找哪一個符號，",
+        "它就把符號前面的部分交給你，",
+        "長度不固定也沒關係！"
+      ]
+    },
+    {
+      "type": "syntax",
+      "title": "語法結構",
+      "formula": "=TEXTBEFORE(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])",
+      "args": [
+        {"name": "text", "zh": "原本的文字", "req": true},
+        {"name": "delimiter", "zh": "分隔符號", "req": true},
+        {"name": "instance_num", "zh": "第幾個符號，負數從後面數", "req": false},
+        {"name": "match_mode", "zh": "0 分大小寫，1 不分", "req": false},
+        {"name": "match_end", "zh": "是否把結尾當成符號", "req": false},
+        {"name": "if_not_found", "zh": "找不到時顯示的內容", "req": false}
+      ],
+      "say": [
+        "我們來看看 TEXTBEFORE 的語法。",
+        "前兩個必填，分別是文字和分隔符號。",
+        "第三個引數指定第幾個符號，負數就從後面數。",
+        "第四、第五個調整比對方式，平常省略就好。",
+        "第六個可以設定找不到符號時要顯示什麼。"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例一：Email 取帳號",
+      "data": [
+        ["Email", "帳號"],
+        ["amy@ymhs.tw", ""],
+        ["tom@gmail.com", ""],
+        ["s1120301@ymhs.tw", ""]
+      ],
+      "cell": "B2",
+      "formula": "=TEXTBEFORE(A2:A4,\"@\")",
+      "result": [["amy"], ["tom"], ["s1120301"]],
+      "steps": [
+        {"at": 1, "range": "A2:A4", "color": 0, "tag": "Email"}
+      ],
+      "resultAt": 3,
+      "say": [
+        "第一個例子，從 Email 取出帳號。",
+        "文字選 A2 到 A4，",
+        "分隔符號是小老鼠，記得加雙引號。",
+        "amy、tom、s1120301，長短不同也全部正確！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例二：從後面數取主檔名",
+      "data": [
+        ["檔名", "主檔名"],
+        ["報告.docx", ""],
+        ["期末.v2.xlsx", ""],
+        ["photo.2025.jpg", ""]
+      ],
+      "cell": "B2",
+      "formula": "=TEXTBEFORE(A2:A4,\".\",-1)",
+      "result": [["報告"], ["期末.v2"], ["photo.2025"]],
+      "steps": [
+        {"at": 1, "range": "A3:A4", "color": 3, "tag": "好幾個點"},
+        {"at": 3, "range": "A2:A4", "color": 0, "tag": "最後一個點"}
+      ],
+      "resultAt": 4,
+      "say": [
+        "第二個例子，想取出檔名中副檔名之前的部分。",
+        "有些檔名裡有好幾個點，",
+        "如果用第一個點來切，就會切錯位置。",
+        "這時第三個引數填負 1，代表從最後一個點來切，",
+        "報告、期末.v2、photo.2025，都正確了！"
+      ]
+    },
+    {
+      "type": "sheet",
+      "title": "範例三：找不到符號時",
+      "data": [
+        ["產品代碼", "類別"],
+        ["TW-1023", ""],
+        ["JP-2088", ""],
+        ["X5501", ""]
+      ],
+      "cell": "B2",
+      "formula": "=TEXTBEFORE(A2:A4,\"-\",1,0,0,\"無\")",
+      "result": [["TW"], ["JP"], ["無"]],
+      "steps": [
+        {"at": 1, "range": "A2:A3", "color": 0, "tag": "有橫線"},
+        {"at": 2, "range": "A4", "color": 3, "tag": "沒有橫線"}
+      ],
+      "resultAt": 4,
+      "note": "沒設定第 6 個引數時，找不到會傳回 #N/A",
+      "say": [
+        "第三個例子，用橫線前的代碼當類別。",
+        "前兩筆都有橫線，可以順利切出 TW 和 JP。",
+        "但 A4 的 X5501 沒有橫線，會出現 #N/A。",
+        "我們在第六個引數填上無，",
+        "找不到符號時，就會顯示無，表格乾淨多了。"
+      ]
+    },
+    {
+      "type": "compare",
+      "title": "TEXTBEFORE vs LEFT",
+      "head": ["比較項目", "LEFT", "TEXTBEFORE"],
+      "rows": [
+        ["切的依據", "固定字數", "分隔符號"],
+        ["長度不一", "容易出錯", "自動處理"],
+        ["可用版本", "所有版本", "365 / 2024"]
+      ],
+      "say": [
+        "我們把它和 LEFT 比一比。",
+        "LEFT 依照字數來切，TEXTBEFORE 依照符號來切。",
+        "資料長度不一樣時，TEXTBEFORE 方便多了，",
+        "不過它只有新版的 Excel 才能使用喔。"
+      ]
+    },
+    {
+      "type": "quiz",
+      "title": "隨堂小測驗",
+      "q": "=TEXTBEFORE(\"2025-10-25\",\"-\") 會得到？",
+      "options": ["2025", "10", "2025-10", "25"],
+      "answer": 0,
+      "explain": "預設找第 1 個橫線，傳回它前面的 2025",
+      "say": [
+        "來個小測驗！",
+        "對 2025-10-25 使用 TEXTBEFORE，",
+        "分隔符號是橫線，其他引數都省略，會得到什麼？",
+        "給你三秒鐘想一想。",
+        "答案是 2025！預設是用第一個橫線來切。"
+      ]
+    },
+    {
+      "type": "recap",
+      "title": "重點回顧",
+      "items": [
+        "傳回分隔符號前的文字",
+        "長度不一也能正確擷取",
+        "負數從最後一個符號找",
+        "可自訂找不到的結果"
+      ],
+      "say": [
+        "最後來複習一下。",
+        "TEXTBEFORE 會傳回分隔符號前面的文字，",
+        "長度不一樣也能正確擷取。",
+        "第三個引數用負數就從後面找，第六個處理找不到。",
+        "快打開 Excel 練習看看吧，我們下次見！"
+      ]
+    }
+  ]
+}
